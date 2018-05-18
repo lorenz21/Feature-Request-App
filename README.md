@@ -1,2 +1,4 @@
-# Feature-Request-App
-Web application that allows users to create "feature requests"
+# Engineering Project
+---
+### Feature Request App
+Web application that allows users to create "feature requests". 
