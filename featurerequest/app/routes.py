@@ -53,7 +53,11 @@ def register():
 def user(username):
     form = RequestForm()
     if form.validate_on_submit():
-        request = Request(description=form.request.data, 
+        request = Request(title=form.title.data, 
+        description=form.description.data,
+        product_area=form.product_area.data,
+        clients=form.clients.data,
+        priority=form.priority.data, 
         requestor=current_user)
         db.session.add(request)
         db.session.commit()

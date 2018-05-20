@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User
 
@@ -29,5 +29,9 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please select another email.')
 
 class RequestForm(FlaskForm):
-    request = TextAreaField('Request here', validators=[DataRequired(), Length(min=1, max=120)])
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=120)])
+    product_area = SelectField('Product Area', choices=[("Policies", "POLICIES"), ("Billing", "BILLING"), ("Claims", "CLAIMS"), ("Reports", "REPORTS")])
+    clients = SelectField('Client', choices=[("Client A", "Client A"), ("Client B", "Client B"), ("Client C", "Client C"), ("Client D", "Client D")])
+    priority = SelectField('Request Priority', choices=[("4", "Low"), ("3", "Medium"), ("2", "Urgent"), ("1", "Critical")])
     submit = SubmitField('Submit')

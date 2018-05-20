@@ -4,16 +4,44 @@
     <h1>User: {{ user.username }}</h1>
     <hr>
     {% for feature in features %}
-    {{ feature.requestor.username }} requested: {{ feature.description }}
+    {{ feature.requestor.username }} requested: {{ feature.product_area }} {{ feature.description }}
     <br>
     {% endfor %}
     {% if user.last_seen %} <div>Last seen on: {{ user.last_seen }}</div>{% endif %}
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <div>
-            {{ form.request.label }}
-            {{ form.request(cols=32, rows=4) }}
-            {% for error in form.request.errors %}
+            {{ form.title.label }}
+            {{ form.title }}
+            {% for error in form.title.errors %}
+            <span style="color:red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.description.label }}
+            {{ form.description(cols=32, rows=4) }}
+            {% for error in form.description.errors %}
+            <span style="color:red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.product_area.label }}
+            {{ form.product_area }}
+            {% for error in form.product_area.errors %}
+            <span style="color:red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.clients.label }}
+            {{ form.clients }}
+            {% for error in form.clients.errors %}
+            <span style="color:red">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.priority.label }}
+            {{ form.priority }}
+            {% for error in form.priority.errors %}
             <span style="color:red">{{ error }}</span>
             {% endfor %}
         </div>

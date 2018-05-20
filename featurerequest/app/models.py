@@ -29,6 +29,8 @@ class Request(db.Model):
     description = db.Column(db.Text(), index=True)
     target_date = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
     product_area = db.Column(db.String(64), index=True)
+    clients = db.Column(db.String(64), index=True)
+    priority = db.Column(db.Integer, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
