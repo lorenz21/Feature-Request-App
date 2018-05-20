@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if current_user.is_anonymous %}
+    <h1>Please sign in to view/create feature request.</h1>
+    {% else %}
+    <h1>{{ current_user.username }} Request:</h1>
+    {% endif %}
+    {% for feature in features %}
+    <div class="card" style="width:18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Title: {{ feature.title }}</li>
+            <li class="list-group-item">Description: {{ feature.description }}</li>
+            <li class="list-group-item">Target Date: {{ feature.target_date }}</li>
+            <li class="list-group-item">Product Area: {{ feature.product_area }}</li>
+            <li class="list-group-item">Clients: {{ feature.clients }}</li>
+            <li class="list-group-item">Priority: {{ feature.priority }}</li>
+        </ul>
+    </div>
+    {% endfor %}
+{% endblock %}

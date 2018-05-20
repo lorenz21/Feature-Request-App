@@ -6,11 +6,12 @@ from app.models import User, Request
 from werkzeug.urls import url_parse
 from datetime import datetime
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 # @login_required
 def index():
     return render_template('index.html')
+    
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,6 +68,12 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     features = current_user.user_requests()
     return render_template('user.html', user=user, features=features, form=form)
+
+@app.route('/requests', methods=['GET', 'POST'])
+@login_required
+def requests():
+    features = current_user.user_requests()
+    return render_template('requests.html', features=features)
 
 @app.before_request
 def before_request():

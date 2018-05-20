@@ -1,27 +1,41 @@
-<html>
-<head>
-    <title>Feature Request</title>
-</head>
-<body>
-    <div>Feature Request: 
-        <a href="{{ url_for('index') }}">Home</a>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+Feature Request
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='style.css')}}">
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default"> 
+        <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
+        <a class="navbar-brand" href="{{ url_for('login') }}">Login</a>
         {% else %}
-        <a href="{{ url_for('user', username=current_user.username ) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a class="navbar-brand" href="{{ url_for('user', username=current_user.username ) }}">Profile</a>
+        <a class="navbar-brand" href="{{ url_for('requests') }}">View your requests</a>
+        <a class="navbar-brand" href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
+    </nav>
+    
+{% endblock %}
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block app_content %}{% endblock %}
     </div>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
+{% endblock %}
 </body>
 </html>
