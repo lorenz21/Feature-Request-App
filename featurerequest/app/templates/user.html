@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>User: {{ user.username }}</h1>
+    <hr>
+    {% for feature in features %}
+    {{ feature.requestor.username }} requested: {{ feature.description }}
+    <br>
+    {% endfor %}
+    {% if user.last_seen %} <div>Last seen on: {{ user.last_seen }}</div>{% endif %}
+{% endblock %}
