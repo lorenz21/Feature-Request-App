@@ -1,8 +1,8 @@
 from app import app, db
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, RequestForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Request
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -48,15 +48,21 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-@app.route('/user/<username>')
+@app.route('/user/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
+    form = RequestForm()
+    if form.validate_on_submit():
+        request = Request(description=form.request.data, 
+        requestor=current_user)
+        db.session.add(request)
+        db.session.commit()
+        flash('Your request has been recorded.')
+        return redirect(url_for('index'))
+    #requests = Request.query.filter_by(user_id=current_user.user_id).all()
     user = User.query.filter_by(username=username).first_or_404()
-    features = [
-        {'requestor': user, 'description': 'New heading'},
-        {'requestor': user, 'description': 'More home page space'}
-    ]
-    return render_template('user.html', user=user, features=features)
+    features = current_user.user_requests()
+    return render_template('user.html', user=user, features=features, form=form)
 
 @app.before_request
 def before_request():
