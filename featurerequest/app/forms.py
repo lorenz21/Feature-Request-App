@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
-from app.models import User
+from app.models import User, Feature
+from wtforms.fields.html5 import DateField
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -33,5 +34,15 @@ class RequestForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=120)])
     product_area = SelectField('Product Area', choices=[("Policies", "POLICIES"), ("Billing", "BILLING"), ("Claims", "CLAIMS"), ("Reports", "REPORTS")])
     clients = SelectField('Client', choices=[("Client A", "Client A"), ("Client B", "Client B"), ("Client C", "Client C"), ("Client D", "Client D")])
+    target_date = DateField('Target Deadline', description = 'Expected deadline for feature request', validators=[DataRequired()], format='%Y-%m-%d')
     priority = SelectField('Request Priority', choices=[("4", "Low"), ("3", "Medium"), ("2", "Urgent"), ("1", "Critical")])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Add Request')
+
+class EditRequestForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=120)])
+    product_area = SelectField('Product Area', choices=[("Policies", "POLICIES"), ("Billing", "BILLING"), ("Claims", "CLAIMS"), ("Reports", "REPORTS")])
+    clients = SelectField('Client', choices=[("Client A", "Client A"), ("Client B", "Client B"), ("Client C", "Client C"), ("Client D", "Client D")])
+    target_date = DateField('Target Deadline (Y-M-D) 2018-01-01', description = 'Expected deadline for feature request', validators=[DataRequired()], format='%Y-%m-%d')
+    priority = SelectField('Request Priority', choices=[("4", "Low"), ("3", "Medium"), ("2", "Urgent"), ("1", "Critical")])
+    submit = SubmitField('Update')

@@ -15,27 +15,24 @@ Feature Request
         <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
         {% if current_user.is_anonymous %}
         <a class="navbar-brand" href="{{ url_for('login') }}">Login</a>
+        <a class="navbar-brand" href="{{ url_for('register') }}">Register</a>
         {% else %}
-        <a class="navbar-brand" href="{{ url_for('user', username=current_user.username ) }}">Profile</a>
-        <a class="navbar-brand" href="{{ url_for('requests') }}">View your requests</a>
+        <a class="navbar-brand" href="{{ url_for('add_request', username=current_user.username) }}">Add new feature request</a>
+        <a class="navbar-brand" href="{{ url_for('display_requests', user_id=current_user.username) }}">View your requests</a>
+        <a class="navbar-brand" href="{{ url_for('user', username=current_user.username) }}">Profile</a>
         <a class="navbar-brand" href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
     </nav>
-    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}  
 {% endblock %}
-{% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block app_content %}{% endblock %}
-    </div>
-{% endblock %}
+{% block content %}{% endblock %}
 </body>
 </html>
