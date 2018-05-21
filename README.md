@@ -13,33 +13,39 @@ Web application that allows users to create "feature requests".
 
 ## Build Setup
 
-1. Create venv (Recommended)
+1. Clone the repository
+  ```bash
+  git clone https://github.com/lorenz21/Feature-Request-App.git
+  ```
+
+2. Change Directories into the project
+  ```bash
+  cd Feature-Request-App
+  ```
+
+3. Create venv (Recommended)
   ```bash
   python3 -m venv <virtual_env_name>
   ```
 
-2. Install requirements
-
+4. Install requirements
   ```bash
   pip install -r requirements.txt
   ```
 
-4. Export environment variables
-
+5. Export environment variables
   ```bash
   export FLASK_APP=featurerequest.py
   ```
 
-5. Build database
-
+6. Build database
   ```bash
   flask db init
   flask db migrate -m"initial build"
   flask db upgrade
   ```
 
-6. run
-
+7. run
   ```bash
   flask run  
   # server at http://127.0.0.1:5000/
