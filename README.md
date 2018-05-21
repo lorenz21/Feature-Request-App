@@ -34,11 +34,7 @@ Web application that allows users to create "feature requests".
 
   ```bash
   flask db init
-  ```
-    ```bash
   flask db migrate -m"initial build"
-  ```
-    ```bash
   flask db upgrade
   ```
 
