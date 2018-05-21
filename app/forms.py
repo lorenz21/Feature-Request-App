@@ -31,7 +31,7 @@ class RegistrationForm(FlaskForm):
 
 class RequestForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=120)])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=256)])
     product_area = SelectField('Product Area', choices=[("Policies", "POLICIES"), ("Billing", "BILLING"), ("Claims", "CLAIMS"), ("Reports", "REPORTS")])
     clients = SelectField('Client', choices=[("Client A", "Client A"), ("Client B", "Client B"), ("Client C", "Client C"), ("Client D", "Client D")])
     target_date = DateField('Target Deadline', description = 'Expected deadline for feature request', validators=[DataRequired()], format='%Y-%m-%d')
@@ -40,7 +40,7 @@ class RequestForm(FlaskForm):
 
 class EditRequestForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=120)])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=256)])
     product_area = SelectField('Product Area', choices=[("Policies", "POLICIES"), ("Billing", "BILLING"), ("Claims", "CLAIMS"), ("Reports", "REPORTS")])
     clients = SelectField('Client', choices=[("Client A", "Client A"), ("Client B", "Client B"), ("Client C", "Client C"), ("Client D", "Client D")])
     target_date = DateField('Target Deadline (Y-M-D) 2018-01-01', description = 'Expected deadline for feature request', validators=[DataRequired()], format='%Y-%m-%d')

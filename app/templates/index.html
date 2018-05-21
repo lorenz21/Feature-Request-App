@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        {% if current_user.is_anonymous %}
+        <h1 class="display-4">Please sign in to view/create feature request.</h1>
+        {% else %}
+        <h1 class="display-4">Welcome, {{ current_user.username }}</h1>
+        <p class="lead">This is a web application to allow clients to support feature request to a companies software.</p>
+        <hr class="my-4">
+        <p>Use the following buttons to create a feature request, view created tickets, or add/delete them from the request view.</p>
+        <a class="btn btn-success btn-lg" href="{{ url_for('add_request', username=current_user.username) }}" role="button">Create feature request</a>
+        <a class="btn btn-dark btn-lg" href="{{ url_for('display_requests', user_id=current_user.username) }}" role="button">View all requests</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
