@@ -1,1 +1,1 @@
-web: flask db upgrade; flask translate compile; gunicorn featurerequest:app
+web: flask db init; flask db migrate -m"initial build"; flask db upgrade; flask translate compile; gunicorn featurerequest:app
