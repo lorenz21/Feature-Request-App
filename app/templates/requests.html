@@ -1,35 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    {% if current_user.is_anonymous %}
-    <h1>Please sign in to view/create feature request.</h1>
-    {% else %}
-    <h1>{{ user.username }} Request:</h1>
-    {% endif %}
-    {% for feature in features %}
-    <div class="card" style="width: 100%;">
-            <div class="card-body">
-              <h5 class="card-title">Title: {{ feature.title }}</h5>
-              <hr>
-              <h6 class="card-subtitle mb-2 text-muted alert alert-secondary">Target Date: {{ feature.target_date }}</h6>
-              <h6 class="card-subtitle mb-2 text-muted alert alert-secondary">
-               Priority: 
-               {% if feature.priority == 1 %}
-               Critical 
-               {% elif feature.priority == 2 %}
-               Urgent
-               {% elif feature.priority == 3 %}
-               Medium 
-               {% else %}
-               Low
-               {% endif %}</h6>
-              <hr>
-              <p class="card-text">Description: {{ feature.description }}</p>
-              <a href="{{ url_for('delete_request', feature_id=feature.id) }}"><button type="button" class="btn btn-outline-danger">Delete</button></a>
-              <a href="{{ url_for('edit_request', feature_id=feature.id) }}"><button type="button" class="btn btn-outline-success">Edit</button></a>
-            </div>
-    </div>
-    {% endfor %}
+{% if current_user.is_anonymous %}
+<h1>Please sign in to view/create feature request.</h1>
+{% else %}
+<h1>{{ user.username }} Request:</h1>
+{% endif %}
+{% for feature in features %}
+<div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">Title: {{ feature.title }}</h5>
+          <hr>
+          <h6 class="card-subtitle mb-2 text-muted alert alert-secondary">Target Date: {{ feature.target_date }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted alert alert-secondary">
+            Priority: 
+            {% if feature.priority == 1 %}
+            Critical 
+            {% elif feature.priority == 2 %}
+            Urgent
+            {% elif feature.priority == 3 %}
+            Medium 
+            {% else %}
+            Low
+            {% endif %}</h6>
+          <hr>
+          <p class="card-text">Description: {{ feature.description }}</p>
+          <a href="{{ url_for('delete_request', feature_id=feature.id) }}"><button type="button" class="btn btn-outline-danger">Delete</button></a>
+          <a href="{{ url_for('edit_request', feature_id=feature.id) }}"><button type="button" class="btn btn-outline-success">Edit</button></a>
+        </div>
 </div>
+{% endfor %}
 {% endblock %}

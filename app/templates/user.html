@@ -2,9 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-<div class="container">
-    <p>Name: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Last Seen on: {{ user.last_seen }}</p>
-</div>
+<p>Name: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Last Seen on: {{ user.last_seen }}</p>
 {% endblock %}
