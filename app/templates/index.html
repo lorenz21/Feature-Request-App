@@ -24,12 +24,13 @@
 {% endblock navbar %}
 
 {% block content %}
-<div class="jumbotron">
+<div class="jumbotron text-center">
     {% if current_user.is_anonymous %}
     <h1 class="display-4">Please <a class="display-4" href="{{ url_for('login') }}">sign in</a> to view/create feature request.</h1>
     {% else %}
     <h1 class="display-4">Welcome, {{ current_user.username }}</h1>
-    <p class="lead">This is a web application to allow clients to support feature request to a companies software.</p>
+    <p class="lead">This is a web application to allow clients to submit feature request to a companies software.</p>
+    <i class="fas fa-tasks fa-10x"></i>
     <hr class="my-4">
     <p>Use the following buttons to create a feature request, view created tickets, or add/delete them from the request view.</p>
     <a class="btn btn-success btn-lg" href="{{ url_for('add_request', username=current_user.username) }}" role="button">Create feature request</a>
